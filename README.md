@@ -12,7 +12,7 @@ This script is designed to automatically repair a read-only file system on OpenW
   ```
   wget https://raw.githubusercontent.com/frizkyiman/Fix-Read-only-filesystem/main/repair_ro
   ```
-5. Replace *<'device'>* with the appropriate file system device you want to repair in the script. (e.g., mmcblk0p2 or sda1).
+5. Replace *<'device'>* with your rootfs partition or what you like to fix (e.g., mmcblk0p2 or sda2).
   ```
   nano /etc/init.d/repair_ro
   ```
