@@ -6,7 +6,7 @@ start() {
     echo "Repairing file system..."
 
     # Check if the file system is currently in read-only mode
-    if mount | grep -q "ro"; then
+    if grep -qs " ro " /proc/mounts; then
         echo "The file system is currently read-only. Initiating repair..."
 
         # Perform file system repair using e2fsck -y
