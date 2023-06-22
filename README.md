@@ -17,6 +17,7 @@ This script is designed to automatically repair a read-only file system on OpenW
   nano /etc/init.d/repair_ro
   ```
   (ctrl+x then Y then Enter to save change).
+
 6. Give execute permissions to the script by running the command:
   ```
   chmod +x /etc/init.d/repair_ro
