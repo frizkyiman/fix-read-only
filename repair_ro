@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+START=99
+
+start() {
+    echo "Repairing file system..."
+
+    # Check if the file system is currently in read-only mode
+    if grep -qs " ro " /proc/mounts; then
+        echo "The file system is currently read-only. Initiating repair..."
+
+        # Perform file system repair using e2fsck -y
+        e2fsck -y /dev/mmcblk0p2  # Replace with the file system device you want to repair, e.g., /dev/sda1
+
+        # Check if the repair was successful
+        if [ $? -eq 0 ]; then
+            echo "File system repair successful."
+            echo "Rebooting the system..."
+            reboot
+        else
+            echo "An error occurred while repairing the file system."
+        fi
+
+        # Restore the file system to read-write mode
+        mount -o remount,rw /
+    else
+        echo "The file system is currently in read-write mode."
+    fi
+}
