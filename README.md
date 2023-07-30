@@ -1,5 +1,7 @@
-# Fix Read only filesystem
-This script is designed to automatically repair a read-only file system on OpenWrt devices using the init.d system. It checks if the file system is in read-only mode and initiates the repair process using the **'e2fsck -y'** command. If the repair is successful, it restores the file system to read-write mode and optionally performs a reboot to apply the changes.
+# Fix Read only root file system
+This script is designed to automatically repair a read-only root file system on OpenWrt devices. It checks if the file system is in read-only mode and initiates the repair process using the **'e2fsck -y'** command. 
+This script also detects where the system root partition is located before run the command using (cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//'). 
+If the repair is successful, it restores the file system to read-write mode and optionally performs a reboot to apply the changes.
 
 **Usage Instructions:**
 1. Ensure you have access to an OpenWrt device with a file system that needs repair.
@@ -8,23 +10,11 @@ This script is designed to automatically repair a read-only file system on OpenW
   ```
   wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro -O /etc/init.d/repair_ro && chmod +x /etc/init.d/repair_ro
   ```
-5. Replace /dev/*<'device'>* with your rootfs partition or what you like to fix (e.g., dev/mmcblk0p2 or /dev/sda2).
-
-check first your rootfs partition using :
-  ```
-  cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//'
-  ```
-edit the script :
-  ```
-  nano /etc/init.d/repair_ro
-  ```
-  (ctrl+x then Y then Enter to save change).
-
-6. Enable the script to run at boot time by running the command:
+4. Enable the script to run at boot time by running the command:
   ```
   /etc/init.d/repair_ro enable
   ```
-7. Run the script manually with the following command:
+5. Run the script manually with the following command:
   ```
   /etc/init.d/repair_ro start
   ```
