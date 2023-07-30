@@ -1,4 +1,4 @@
-# Fix-Read-only-filesystem
+# Fix Read only filesystem
 This script is designed to automatically repair a read-only file system on OpenWrt devices using the init.d system. It checks if the file system is in read-only mode and initiates the repair process using the **'e2fsck -y'** command. If the repair is successful, it restores the file system to read-write mode and optionally performs a reboot to apply the changes.
 
 **Usage Instructions:**
@@ -10,7 +10,7 @@ This script is designed to automatically repair a read-only file system on OpenW
   ```
 4. Download the script by running the following command:
   ```
-  wget https://raw.githubusercontent.com/frizkyiman/Fix-Read-only-filesystem/main/repair_ro
+  wget https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro
   ```
 5. Replace *<'device'>* with your rootfs partition or what you like to fix (e.g., mmcblk0p2 or sda2).
   ```
