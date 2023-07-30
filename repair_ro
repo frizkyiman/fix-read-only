@@ -12,7 +12,7 @@ start() {
         echo "The file system is currently read-only. Initiating repair..."
 
         # Perform file system repair using e2fsck -y
-        e2fsck -y /dev/mmcblk0p2  # Replace with the file system device you want to repair, e.g., /dev/sda1
+        e2fsck -y /dev/<device>  # Replace <device> with the file system device you want to repair, e.g., mmcblk0p2, sda2
 
         # Check if the repair was successful
         if [ $? -eq 0 ]; then
