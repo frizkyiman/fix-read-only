@@ -9,10 +9,20 @@ start() {
 
     # Check if the file system is currently in read-only mode
     if grep -qs " ro " /proc/mounts; then
+        # Find the root file system device
+        root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
+
+        if [ -z "$root_device" ]; then
+            echo "Root file system not found. Unable to repair."
+            return
+        fi
+
+        echo "Detected root file system: $root_device"
+
         echo "The file system is currently read-only. Initiating repair..."
 
         # Perform file system repair using e2fsck -y
-        e2fsck -y /dev/<device>  # Replace <device> with the file system device you want to repair, e.g., mmcblk0p2, sda2
+        e2fsck -y "$root_device"
 
         # Check if the repair was successful
         if [ $? -eq 0 ]; then
@@ -24,7 +34,7 @@ start() {
         fi
 
         # Restore the file system to read-write mode
-        mount -o remount,rw /
+        mount -o remount,rw "$root_device" /
     else
         echo "The file system is currently in read-write mode."
     fi
