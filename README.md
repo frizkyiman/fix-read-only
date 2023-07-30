@@ -8,7 +8,13 @@ This script is designed to automatically repair a read-only file system on OpenW
   ```
   wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro -O /etc/init.d/repair_ro && chmod +x /etc/init.d/repair_ro
   ```
-5. Replace *<'device'>* with your rootfs partition or what you like to fix (e.g., mmcblk0p2 or sda2).
+5. Replace /dev/*<'device'>* with your rootfs partition or what you like to fix (e.g., dev/mmcblk0p2 or /dev/sda2).
+
+check first your rootfs partition using :
+  ```
+  cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//'
+  ```
+edit the script :
   ```
   nano /etc/init.d/repair_ro
   ```
