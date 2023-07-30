@@ -4,29 +4,20 @@ This script is designed to automatically repair a read-only file system on OpenW
 **Usage Instructions:**
 1. Ensure you have access to an OpenWrt device with a file system that needs repair.
 2. Connect to the device using SSH or a terminal.
-3. Move to the init.d directory:
+3. Install the script by running the following command:
   ```
-  cd /etc/init.d/
-  ```
-4. Download the script by running the following command:
-  ```
-  wget https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro
+  wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro -O /etc/init.d/repair_ro && chmod +x /etc/init.d/repair_ro
   ```
 5. Replace *<'device'>* with your rootfs partition or what you like to fix (e.g., mmcblk0p2 or sda2).
   ```
   nano /etc/init.d/repair_ro
   ```
   (ctrl+x then Y then Enter to save change).
-
-6. Give execute permissions to the script by running the command:
-  ```
-  chmod +x /etc/init.d/repair_ro
-  ```
-7. Enable the script to run at boot time by running the command:
+6. Enable the script to run at boot time by running the command:
   ```
   /etc/init.d/repair_ro enable
   ```
-8. Run the script manually with the following command:
+7. Run the script manually with the following command:
   ```
   /etc/init.d/repair_ro start
   ```
