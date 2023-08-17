@@ -1,6 +1,6 @@
 # Fix read-only root file system
-This script is designed to automatically repair a read-only root file system on OpenWrt devices. It checks if the file system is in read-only mode and initiates the repair process using the **'e2fsck -y'** command. 
-This script also detects where the system root partition is located before run the command using (cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//'). 
+This script is designed to automatically repair a read-only root file system on OpenWrt devices. It checks if the file system is in read-only mode and initiates the repair process using the **e2fsck** command. 
+This script also detects where the system root partition is located before run the command. 
 If the repair is successful, it restores the file system to read-write mode and optionally performs a reboot to apply the changes.
 
 **Usage Instructions:**
