@@ -8,7 +8,7 @@ If the repair is successful, it restores the file system to read-write mode and 
 2. Connect to the device using SSH or a terminal.
 3. Install the script by running the following command:
   ```
-  wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/repair_ro -O /etc/init.d/repair_ro && chmod +x /etc/init.d/repair_ro
+  wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh && rm /tmp/install.sh
   ```
 4. Enable the script to run at boot time by running the command:
   ```
