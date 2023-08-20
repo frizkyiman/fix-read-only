@@ -18,6 +18,11 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   /etc/init.d/repair_ro start
   ```
+You can also call this script with the command from SSH or terminal:
+```
+repair_ro
+```
+
   The script will automatically check if the file system is read-only, repair it if needed, and restore it to read-write mode.
   
   **Note:** If the repair is successful, the script will offer the option to reboot the system to apply the changes. You can choose to reboot by typing 'y' and pressing Enter, or skip the reboot by typing 'n' and pressing Enter.
