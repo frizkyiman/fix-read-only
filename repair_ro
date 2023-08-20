@@ -5,6 +5,14 @@
 START=99
 
 start() {
+    if [ ! -d /usr/bin/repair_ro ]; then
+        cat <<'EOF' >/usr/bin/repair_ro
+#!/bin/sh
+/etc/init.d/repair_ro start
+EOF
+        chmod +x /usr/bin/repair_ro
+    fi
+
     echo "Repairing file system..."
 
     # Check if the file system is currently in read-only mode
