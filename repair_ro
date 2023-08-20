@@ -15,9 +15,7 @@ EOF
 
     echo "Repairing file system..."
 
-    # Check if the file system is currently in read-only mode
     if grep -qs " ro " /proc/mounts; then
-        # Find the root file system device
         root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
 
         if [ -z "$root_device" ]; then
@@ -29,10 +27,8 @@ EOF
 
         echo "The file system is currently read-only. Initiating repair..."
 
-        # Perform file system repair using e2fsck -y
         e2fsck -y "$root_device"
 
-        # Check if the repair was successful
         if [ $? -eq 0 ]; then
             echo "File system repair successful."
             echo "Rebooting the system..."
@@ -41,7 +37,6 @@ EOF
             echo "An error occurred while repairing the file system."
         fi
 
-        # Restore the file system to read-write mode
         mount -o remount,rw "$root_device" /
     else
         echo "The file system is currently in read-write mode."
