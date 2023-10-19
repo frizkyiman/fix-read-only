@@ -2,29 +2,20 @@
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
-START=99
+START=01
 
 start() {
-    if [ ! -d /usr/bin/repair_ro ]; then
-        cat <<'EOF' >/usr/bin/repair_ro
-#!/bin/sh
-/etc/init.d/repair_ro start
-EOF
-        chmod +x /usr/bin/repair_ro
+    # Finding root partition
+    root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
+
+    if [ -z "$root_device" ]; then
+        echo "Root file system not found. Unable to repair."
+        exit 1
     fi
 
-    echo "Repairing file system..."
-
-    if grep -qs " ro " /proc/mounts; then
-        root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
-
-        if [ -z "$root_device" ]; then
-            echo "Root file system not found. Unable to repair."
-            return
-        fi
-
+    # Checking root partition status
+    if mount | grep -q " / " | grep -q "ro"; then
         echo "Detected root file system: $root_device"
-
         echo "The file system is currently read-only. Initiating repair..."
 
         e2fsck -y "$root_device"
@@ -37,8 +28,8 @@ EOF
             echo "An error occurred while repairing the file system."
         fi
 
-        mount -o remount,rw "$root_device" /
+        mount -o remount,rw "$root_device" / 
     else
-        echo "The file system is currently in read-write mode."
+        echo "The root file system "$root_device" is currently in read-write mode."
     fi
-}
+    }
