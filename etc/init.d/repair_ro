@@ -2,7 +2,7 @@
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
-START=01
+START=10
 
 start() {
     # Finding root partition
