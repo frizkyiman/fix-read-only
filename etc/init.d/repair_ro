@@ -2,7 +2,7 @@
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
-START=99
+START=00
 
 start() {
     # Finding root partition and status
@@ -23,7 +23,7 @@ start() {
             echo "File system repair successful. Rebooting the system..."
             echo "Mounting $root_device to read-write"
             mount -o remount,rw "$root_device" /
-            reboot
+            reboot -f
         else
             echo "An error occurred while repairing the file system."
         fi
