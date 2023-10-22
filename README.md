@@ -18,6 +18,10 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   /etc/init.d/repair_ro start
   ```
+6. Add script to startup
+  ```
+  sed -i '/exit 0/i /etc/init.d/repair_ro' /etc/rc.local
+  ```
 You can also call this script with the command from SSH or terminal:
 ```
 repair_ro
