@@ -2,34 +2,33 @@
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
-START=10
+START=99
 
 start() {
-    # Finding root partition
+    # Finding root partition and status
     root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
+    ro_status=$(mount | awk '/\/dev\/root/ && /ro,/ {print $6}' | grep -o 'ro' | head -n 1)
 
     if [ -z "$root_device" ]; then
         echo "Root file system not found. Unable to repair."
         exit 1
     fi
 
-    # Checking root partition status
-    if mount | grep -q " / " | grep -q "ro"; then
+    # Checking root partition status and repairing if needed
+    if [ "$ro_status" = "ro" ]; then
         echo "Detected root file system: $root_device"
         echo "The file system is currently read-only. Initiating repair..."
 
-        e2fsck -y "$root_device"
-
-        if [ $? -eq 0 ]; then
-            echo "File system repair successful."
-            echo "Rebooting the system..."
+        if e2fsck -y "$root_device"; then
+            echo "File system repair successful. Rebooting the system..."
+            echo "Mounting $root_device to read-write"
+            mount -o remount,rw "$root_device" /
             reboot
         else
             echo "An error occurred while repairing the file system."
         fi
-
-        mount -o remount,rw "$root_device" / 
+ 
     else
-        echo "The root file system "$root_device" is currently in read-write mode."
+        echo "The root file system $root_device is currently in read-write mode."
     fi
-    }
+}
