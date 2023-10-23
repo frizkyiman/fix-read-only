@@ -10,17 +10,14 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   wget --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh
   ```
-4. Enable the script to run at boot time by running the command:
+
+4. Run the script manually with the following command:
   ```
-  /etc/init.d/repair_ro enable
-  ```
-5. Run the script manually with the following command:
-  ```
-  /etc/init.d/repair_ro start
+  /usr/bin/repair_ro
   ```
 6. Add script to startup (optional, already include when installing)
   ```
-  sed -i '/exit 0/i /etc/init.d/repair_ro' /etc/rc.local
+  sed -i '/exit 0/i /usr/bin/repair_ro' /etc/rc.local
   ```
 You can also call this script with the command from SSH or terminal:
 ```
