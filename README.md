@@ -27,5 +27,6 @@ repair_ro
   The script will automatically check if the file system is read-only, repair it if needed, and restore it to read-write mode.
   
   **Note:** 
+* Run the script again if fail to fix ro while boot proccess.
 * If the repair is successful, the script will reboot the system to apply the changes.
 * You need reboot manually if the script fail to reboot after fixing the ro file system.
