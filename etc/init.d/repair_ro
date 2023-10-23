@@ -1,34 +1,31 @@
-#!/bin/sh /etc/rc.common
+#!/bin/sh
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
-START=00
+# Finding root partition and status
+root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
+ro_status=$(mount | awk '/\/dev\/root/ && /ro,/ {print $6}' | grep -o 'ro' | head -n 1)
 
-start() {
-    # Finding root partition and status
-    root_device=$(cat /proc/cmdline | grep -o 'root=[^ ]*' | sed 's/root=//')
-    ro_status=$(mount | awk '/\/dev\/root/ && /ro,/ {print $6}' | grep -o 'ro' | head -n 1)
+if [ -z "$root_device" ]; then
+    echo "Root file system not found. Unable to repair."
+    exit 1
+fi
 
-    if [ -z "$root_device" ]; then
-        echo "Root file system not found. Unable to repair."
-        exit 1
-    fi
+# Checking root partition status and repairing if needed
+if [ "$ro_status" = "ro" ]; then
+    echo "Detected root file system: $root_device"
+    echo "The file system is currently read-only. Initiating repair..."
 
-    # Checking root partition status and repairing if needed
-    if [ "$ro_status" = "ro" ]; then
-        echo "Detected root file system: $root_device"
-        echo "The file system is currently read-only. Initiating repair..."
-
-        if e2fsck -y "$root_device"; then
-            echo "File system repair successful. Rebooting the system..."
-            echo "Mounting $root_device to read-write"
-            mount -o remount,rw "$root_device" /
-            reboot -f
-        else
-            echo "An error occurred while repairing the file system."
-        fi
- 
+    if e2fsck -y "$root_device"; then
+        echo "File system repair successful."
+        echo "Mounting $root_device to read-write"
+        mount -o remount,rw "$root_device" /
+        echo "Rebooting the system..."
+        reboot
     else
-        echo "The root file system $root_device is currently in read-write mode."
+        echo "An error occurred while repairing the file system."
     fi
-}
+ 
+else
+    echo "The root file system $root_device is currently in read-write mode."
+fi
