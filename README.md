@@ -24,8 +24,8 @@ You can also call this script with the command from SSH or terminal:
 repair_ro
 ```
 
-Note: You need reboot manually if the script fail to reboot after fixing the ro file system.
-
   The script will automatically check if the file system is read-only, repair it if needed, and restore it to read-write mode.
   
-  **Note:** If the repair is successful, the script will reboot the system to apply the changes.
+  **Note:** 
+* If the repair is successful, the script will reboot the system to apply the changes.
+* You need reboot manually if the script fail to reboot after fixing the ro file system.
