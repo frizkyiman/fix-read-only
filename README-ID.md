@@ -1,4 +1,7 @@
 # Fix read-only root file system
+
+[![Translate](https://img.shields.io/badge/Translate-English-brightgreen)](README.md)
+
 Skrip ini dirancang untuk secara otomatis memperbaiki sistem file root yang hanya bisa dibaca pada perangkat OpenWrt. Skrip ini akan memeriksa apakah sistem file berada dalam mode hanya baca dan memulai proses perbaikan menggunakan perintah e2fsck. Skrip ini juga akan mendeteksi lokasi partisi root sistem sebelum menjalankan perintah. Jika perbaikan berhasil, maka sistem file akan dikembalikan ke mode tulis dan mencoba melakukan reboot untuk menerapkan perubahan.
 
 **Instruksi Penggunaan:**
