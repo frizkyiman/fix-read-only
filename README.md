@@ -15,6 +15,10 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   /usr/bin/repair_ro
   ```
+  or using:
+  ```
+  repair_ro
+  ```
   you can also run the script using argumen input as alternate for more spesific rootfs device, eg.
   ```
   repair_ro /dev/mmcblk0p2
@@ -31,11 +35,6 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   repair_ro
   ```
-
-You can also call this script with the command from SSH or terminal:
-```
-repair_ro
-```
   
   **Note:** 
 * Run the script again if fail to fix ro while boot proccess.
