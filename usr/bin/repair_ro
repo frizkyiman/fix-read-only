@@ -28,7 +28,7 @@ if [ "$ro_status" = "ro" ]; then
         echo "Mounting $root_device to read-write"
         mount -o remount,rw "$root_device" /
         echo "Rebooting the system..."
-        sudo reboot
+        reboot
     else
         echo "An error occurred while repairing the file system."
     fi
