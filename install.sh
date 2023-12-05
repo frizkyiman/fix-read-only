@@ -19,9 +19,9 @@ start() {
 EOF
 
 cat <<'EOF' >/usr/bin/repair_ro
-#!/bin/sh /etc/rc.common
+#!/bin/sh
 root_device="$1"
-bash /sbin/repair_ro "$1"
+/sbin/repair_ro "$root_device"
 EOF
 
 echo "Setting permission..."
