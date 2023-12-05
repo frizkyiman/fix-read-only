@@ -29,10 +29,17 @@ if [ "$ro_status" = "ro" ]; then
         mount -o remount,rw "$root_device" /
         echo "Rebooting the system..."
         reboot
+        if [ $? -ne 0 ]; then
+            echo "Reboot command failed. Please try force reboot if necessary using reboot -f"
+        fi
     else
         echo "An error occurred while repairing the file system."
         echo "Trying to reboot if possible"
         echo "please try force reboot if nothing happen using reboot -f"
+        reboot
+        if [ $? -ne 0 ]; then
+            echo "Reboot command failed. Please try force reboot if necessary using reboot -f"
+        fi
     fi
  
 else
