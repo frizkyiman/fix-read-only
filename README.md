@@ -11,12 +11,12 @@ If the repair is successful, it restores the file system to read-write mode and 
 2. Connect to the device using SSH or a terminal.
 3. Install the script by running the following command:
   ```
-  wget --quiet --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh
+  wget --no-check-certificate -q https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && bash /tmp/install.sh
   ```
 
 4. Run the script manually with the following command:
   ```
-  /usr/bin/repair_ro
+  /sbin/repair_ro
   ```
   or using:
   ```
@@ -24,7 +24,7 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   you can also run the script using argumen input as alternate for more spesific rootfs device, eg.
   ```
-  repair_ro /dev/mmcblk0p2
+  /sbin/repair_ro /dev/mmcblk0p2
   ```
   or
   ```
@@ -36,7 +36,7 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   add this before exit 0
   ```
-  repair_ro
+  /sbin/repair_ro
   ```
   
   **Note:** 
