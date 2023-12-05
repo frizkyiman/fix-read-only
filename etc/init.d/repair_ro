@@ -3,5 +3,5 @@
 START=99
 
 start() {
-    /usr/bin/repair_ro
+    /sbin/repair_ro
 }
