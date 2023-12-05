@@ -10,12 +10,12 @@ Skrip ini dirancang untuk secara otomatis memperbaiki sistem file root yang hany
 3. Pasang skrip ini dengan menjalankan perintah berikut:
 
   ```
-  wget --quiet --no-check-certificate https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh
+  wget --no-check-certificate -q https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh
   ```
 
 4. Jalankan skrip secara manual dengan perintah berikut:
   ```
-  /usr/bin/repair_ro
+  /sbin/repair_ro
   ```
   atau dengan:
   ```
@@ -23,7 +23,7 @@ Skrip ini dirancang untuk secara otomatis memperbaiki sistem file root yang hany
   ```
   Anda juga dapat menjalankan skrip dengan argumen input sebagai alternatif untuk perangkat rootfs yang lebih spesifik, misalnya:
   ```
-  repair_ro /dev/mmcblk0p2
+  /sbin/repair_ro /dev/mmcblk0p2
   ```
   atau
   ```
@@ -35,7 +35,7 @@ Skrip ini dirancang untuk secara otomatis memperbaiki sistem file root yang hany
   ```
   tambahkan ini sebelum exit 0
   ```
-  repair_ro
+  /sbin/repair_ro
   ```
   
 **Catatan:** 
