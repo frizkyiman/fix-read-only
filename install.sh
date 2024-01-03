@@ -30,8 +30,8 @@ chmod +x /etc/init.d/repair_ro  > /dev/null
 chmod +x /usr/bin/repair_ro  > /dev/null
 
 echo "Adding to startup..."
-etc/init.d/repair_ro enable
-etc/init.d/repair_ro start
+/etc/init.d/repair_ro enable
+/etc/init.d/repair_ro start
 
 echo "Success!"
 rm "$0"
