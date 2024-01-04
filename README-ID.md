@@ -10,7 +10,7 @@ Skrip ini dirancang untuk secara otomatis memperbaiki sistem file root yang hany
 3. Pasang skrip ini dengan menjalankan perintah berikut:
 
   ```
-  wget --no-check-certificate -q https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && /tmp/install.sh
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh)"
   ```
 
 4. Jalankan skrip secara manual dengan perintah berikut:
