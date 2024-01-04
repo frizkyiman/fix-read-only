@@ -11,7 +11,7 @@ If the repair is successful, it restores the file system to read-write mode and 
 2. Connect to the device using SSH or a terminal.
 3. Install the script by running the following command:
   ```
-  wget --no-check-certificate -q https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh -O /tmp/install.sh && chmod +x /tmp/install.sh && bash /tmp/install.sh
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/frizkyiman/fix-read-only/main/install.sh)"
   ```
 
 4. Run the script manually with the following command:
