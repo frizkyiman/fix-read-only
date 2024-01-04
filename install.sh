@@ -1,8 +1,15 @@
 #!/bin/sh
+
 if [ -e /sbin/repair_ro -a -e /etc/init.d/repair_ro -a -e /usr/bin/repair_ro ]; then
     rm /sbin/repair_ro
     rm /usr/bin/repair_ro
     rm /etc/init.d/repair_ro
+fi
+
+if ! command -v blkid &> /dev/null; then
+    echo "Installing component"
+    opkg update
+    opkg install blkid
 fi
 
 echo "Installing..."
