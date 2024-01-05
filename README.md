@@ -6,6 +6,8 @@ This script is designed to automatically repair a read-only root file system on 
 This script also detects where the system root partition is located before run the command. 
 If the repair is successful, it restores the file system to read-write mode and try performs a reboot to apply the changes.
 
+The operating system can experience read-only problems due to sudden power loss which means that the process of writing data to the system is not completed or is interrupted suddenly, this can cause damage to operating system data.
+
 **Usage Instructions:**
 1. Ensure you have access to an OpenWrt device with a file system that needs repair.
 2. Connect to the device using SSH or a terminal.
@@ -18,7 +20,7 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   /sbin/repair_ro
   ```
-  or using:
+  or directly call the script using:
   ```
   repair_ro
   ```
@@ -30,16 +32,8 @@ If the repair is successful, it restores the file system to read-write mode and 
   ```
   repair_ro /dev/sda2
   ```
-5. Add script to startup (optional)
-  ```
-  nano /etc/rc.local
-  ```
-  add this before exit 0
-  ```
-  /sbin/repair_ro
-  ```
   
   **Note:** 
 * Run the script again if fail to fix ro while boot proccess.
-* If the repair is successful, the script will reboot the system to apply the changes.
+* If the repair is success, the script will reboot the system to apply the changes.
 * You need reboot manually if the script fail to reboot after fixing the ro file system.
