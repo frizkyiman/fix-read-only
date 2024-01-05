@@ -41,4 +41,3 @@ echo "Adding to startup..."
 /etc/init.d/repair_ro start
 
 echo "Success!"
-rm "$0"
