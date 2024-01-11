@@ -89,7 +89,6 @@ permission() {
  chmod +x /usr/bin/repair_ro
  echo "Adding to startup..."
  /etc/init.d/repair_ro enable
- /etc/init.d/repair_ro start
  echo "Success!"
  rm "$0"
 }
