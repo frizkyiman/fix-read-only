@@ -2,10 +2,15 @@
 # Created by Frizkyiman
 # Github https://github.com/frizkyiman/
 
+_echo() {
+  [ "$1" = 'err' ] && echo $2 >&2 || echo $2
+  logger -p "$1" -t repair_co "$2"
+}
+
 if [ -n "$1" ]; then
     root_device="$1"
     if ! blkid | grep -q "$root_device:"; then
-        echo "Root file system device not found in the system. Unable to repair."
+        _echo err "Root file system device '$root_device' not found in the system. Unable to repair."
         exit 1
     fi
 else
@@ -13,35 +18,34 @@ else
 fi
 
 if [ -z "$root_device" ]; then
-    echo "Root file system device not found in the system. Unable to repair."
+    _echo err "Root file system device not found in the system. Unable to repair."
     exit 1
 fi
 
 ro_status=$(mount | awk '/\/dev\/root/ && /ro,/ {print $6}' | grep -o 'ro' | head -n 1)
 
 if [ "$ro_status" = "ro" ]; then
-    echo "Detected root file system: $root_device"
-    echo "The file system is currently read-only. Initiating repair..."
+    _echo notice "Detected root file system: $root_device"
+    _echo notice "The file system is currently read-only. Initiating repair..."
 
     if e2fsck -y "$root_device"; then
-        echo "File system repair successful."
-        echo "Mounting $root_device to read-write"
+        _echo notice "File system repair successful."
+        _echo notice "Mounting $root_device to read-write"
         mount -o remount,rw "$root_device" /
-        echo "Rebooting the system..."
+        _echo notice "Rebooting the system..."
         reboot
         if [ $? -ne 0 ]; then
-            echo "Reboot command failed. Please try force reboot if necessary using reboot -f"
+            _echo err "Reboot command failed. Please try force reboot if necessary using reboot -f"
         fi
     else
-        echo "An error occurred while repairing the file system."
-        echo "Trying to reboot if possible"
-        echo "please try force reboot if nothing happen using reboot -f"
+        _echo notice "An error occurred while repairing the file system."
+        _echo notice "Trying to reboot if possible"
+        _echo notice "please try force reboot if nothing happen using reboot -f"
         reboot
         if [ $? -ne 0 ]; then
-            echo "Reboot command failed. Please try force reboot if necessary using reboot -f"
+            _echo err "Reboot command failed. Please try force reboot if necessary using reboot -f"
         fi
     fi
- 
 else
-    echo "The rootfs $root_device is currently in read-write mode."
+    _echo notice "Root file system device '$root_device' is currently in read-write mode."
 fi
