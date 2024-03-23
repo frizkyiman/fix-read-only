@@ -4,7 +4,7 @@
 
 _echo() {
   [ "$1" = 'err' ] && O="&2" || O="&1"
-  echo "$2" >$O
+  eval "echo $2 >$O"
   logger -p "$1" -t repair_co "$2"
 }
 
