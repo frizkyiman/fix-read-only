@@ -3,8 +3,7 @@
 # Github https://github.com/frizkyiman/
 
 _echo() {
-  [ "$1" = 'err' ] && O="&2" || O="&1"
-  eval "echo $2 >$O"
+  [ "$1" = 'err' ] && echo $2 >&2 || echo $2
   logger -p "$1" -t repair_co "$2"
 }
 
